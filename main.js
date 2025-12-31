@@ -1010,13 +1010,13 @@ function focusCard(cardEl, label, menu = null) {
         const cGender = label.cGender ? `Gender: ${label.cGender}<br>` : '';
         const cSexuality = label.cSexuality ? `Sexuality: ${label.cSexuality}<br>` : '';
         const cNicknames = label.cNicknames ? `Nickname: ${label.cNicknames}<br>` : '';
-        const cReference = label.cReference ? `<br><h2>Reference Art:</h2><br><img src="${label.cReference}"><br><br>` : '';
-        const cGallery = label.cGallery ? label.cGallery.length != 0 ? `<hr><h2>Gallery:</h2><div class="imgContainer">` + label.cGallery.map(imgSrc => `<img src="${imgSrc}">`).join('') + `</div><br>` : '' : '';
+        const cReference = label.cReference ? `<br><h2>Reference Art:</h2><br><img class="lazy" data-src="${label.cReference}"><br><br>` : '';
+        const cGallery = label.cGallery ? label.cGallery.length != 0 ? `<hr><h2>Gallery:</h2><div class="imgContainer">` + label.cGallery.map(imgSrc => `<img class="lazy" data-src="${imgSrc}">`).join('') + `</div><br>` : '' : '';
         const cAddOns = label.cAddOns ? `<br>${label.cAddOns}<br>` : '';
         const details = label.detail ? `<hr>${html}<br>` : '';
 
         html = `
-            <a data-open-card="${ocRulesLocation}">Character rules</a><br>
+            <a data-open-card="info:ocrules">Character rules</a><br>
             <br>
             ${cSpecies}
             ${cPronouns}
@@ -1053,7 +1053,6 @@ function focusCard(cardEl, label, menu = null) {
     });
     const navMenuCode = label.currentMenu || menu.menuId;
     history.pushState({}, '', `?m=${navMenuCode}&i=${label.cardId}`);
-    initLazyLoad();
 
     // set up image handlers inside detailArea
     imgConHandler(detailArea);
