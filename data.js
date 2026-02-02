@@ -3,8 +3,8 @@
     -------------------------- */
 
 // Metadata
-const lastUpdated = 'December 30th, 2025';
-const version = '1.0.0';
+const lastUpdated = 'February 2nd, 2026';
+const version = '1.0.1';
 
 
 
