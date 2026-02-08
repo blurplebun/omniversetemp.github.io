@@ -319,13 +319,13 @@ function initMenu() {
             btn.dataset.angle0 = angleRad; // initial radians
             btn.dataset.orbit = orbit;
             btn.dataset.menuQ = m.menuId;
-            btn.setAttribute('aria-label', m.name);
+            btn.setAttribute('aria-label', m.title);
             btn.style.setProperty('--glow', m.color);
             btn.style.background = m.color || 'transparent';
             btn.innerHTML = `
                 <div class="inner">
                     <div class="menu-thumb-square lazy-bg" data-bg='${m.image || ''}'></div>
-                    ${m.showName && m.name ? `<div class="menu-subtitle">${m.name}</div>` : ''}
+                    ${m.showTitle && m.title ? `<div class="menu-subtitle">${m.title}</div>` : ''}
                 </div>
             `;
 
@@ -594,11 +594,11 @@ function initContent() {
                 while (menu.orbit > currOrbit) {
                     if (!separateOnce) {
                         let orbitMatch = orbitData.find(o => o.orbit === menu.orbit);
-                        t = '<span style="border-left: 6px solid var(--white); padding-right: 8px"></span>' + orbitMatch.name;
+                        t = '<span style="border-left: 6px solid var(--white); padding-right: 8px"></span>' + orbitMatch.title;
                         e = '<span style="border-left: 6px solid var(--white); padding-right: 8px"></span>' + orbitMatch.desc;
                         labelGroup.push({
                             title: t,
-                            excerpt: e
+                            subtitle: e
                         });
                         separateOnce = true;
                     }
@@ -606,8 +606,8 @@ function initContent() {
                 }
                 labelGroup.push({
                     cardId: `menu-${menu.menuId}`,
-                    title: menu.name,
-                    excerpt: menu.subtitle || '',
+                    title: menu.title,
+                    subtitle: menu.subtitle || '',
                     image: menu.image || '',
                     linkId: menu.menuId,
                     banner: true,
@@ -617,7 +617,7 @@ function initContent() {
 
         // main menu data
         mainMenu = {
-            name: MAIN_MENU_TITLE,
+            title: MAIN_MENU_TITLE,
             menuId: 'index',
             subtitle: MAIN_MENU_SUBTITLE,
             labels: labelGroup,
@@ -634,7 +634,7 @@ function initContent() {
                 const linkedMenu = menuItems.find(lm => lm.menuId === lbl.linkId);
                 if (linkedMenu) {
                     lbl.cardId = lbl.linkId;
-                    lbl.title = linkedMenu.name;
+                    lbl.title = linkedMenu.title;
                 }
             }
         })
@@ -644,8 +644,8 @@ function initContent() {
     if (!SIMPLE_MODE) {
         faraway = {
             menuId: 'farawaymenu',
-            name: 'faraway',
-            showName: false,
+            title: 'faraway',
+            showTitle: false,
             orbit: 999,
             scale: 0.01,
             invisible: true,
@@ -661,13 +661,13 @@ let shownMenu = null;
 function showContentFor(menu, sort = null) {
     isTransitioning = false;
     shownMenu = menu;
-    contentTitle.textContent = menu.name;
+    contentTitle.textContent = menu.title;
     contentSubtitle.textContent = menu.subtitle;
     toggleView({ focused: true, show: false });
     toggleView({ content: true, show: true });
     const parentMenu = menuItems.find(m => m.menuId === menu.parent);
     if (parentMenu) {
-        backBtn.querySelector('span').textContent = parentMenu.name || 'Parent Menu';
+        backBtn.querySelector('span').textContent = parentMenu.title || 'Parent Menu';
     } else backBtn.querySelector('span').textContent = SIMPLE_MODE ? 'Close' : 'Menu';
 
 
@@ -785,14 +785,14 @@ function renderContent(menu, sort = null) {
                 h1.innerHTML = lbl.title;
                 header.appendChild(h1);
             }
-            if (lbl.excerpt) {
+            if (lbl.subtitle) {
                 const h2 = document.createElement('div');
                 h2.className = 'content-sub separator';
-                h2.innerHTML = lbl.excerpt;
+                h2.innerHTML = lbl.subtitle;
                 header.appendChild(h2);
             }
 
-            if (lbl.title || lbl.excerpt) cardsContainer.appendChild(header);
+            if (lbl.title || lbl.subtitle) cardsContainer.appendChild(header);
 
             const hr = document.createElement('hr');
             hr.className = 'card-separator';
@@ -851,7 +851,7 @@ function renderContent(menu, sort = null) {
                         c.style.boxShadow = `inset 0 0 30px color-mix(in srgb, ${linkedMenu.color} 50%, transparent)`;
                         c.innerHTML = `
                             <div class="card-text">
-                                <strong>${linkedMenu.name}</strong>
+                                <strong>${linkedMenu.title}</strong>
                                 <div class="excerpt">${linkedMenu.subtitle || ''}</div>
                             </div>
                             <div class="menu-button bubble" style="background:${linkedMenu.color || 'transparent'}; animation-delay: ${i * -0.5}s; box-shadow: 0 0 10px ${linkedMenu.color}">
@@ -876,7 +876,7 @@ function renderContent(menu, sort = null) {
                         <div class="thumb lazy-bg" data-bg="${lbl.image}"></div>
                         <div class="card-text">
                             <strong>${lbl.title}</strong>
-                            <div class="excerpt">${lbl.excerpt || ''}</div>
+                            <div class="excerpt">${lbl.subtitle || ''}</div>
                         </div>
                     `;
                 } else if (lbl.blank) {
@@ -888,7 +888,7 @@ function renderContent(menu, sort = null) {
                     c.innerHTML = `
                         <div class="card-text full">
                             <strong>${lbl.title}</strong>
-                            <div class="excerpt">${lbl.excerpt || ''}</div>
+                            <div class="excerpt">${lbl.subtitle || ''}</div>
                         </div>
                     `;
                     c.dataset.textonly = "true";
@@ -1037,7 +1037,7 @@ function focusCard(cardEl, label, menu = null) {
     const shareURL = !eFolder ? `${location.origin}${location.pathname}?m=${realMenuQ}&i=${label.cardId}` : `${location.origin}${location.pathname}${eFolder}/${realMenuQ}/${label.cardId}`;;
     detailArea.innerHTML = `
         <h1>
-            ${!label.blank ? `<div style="font-size: 20px;"><small><a data-open-card="${menu.menuId}">${menu.name}</a> /</small></div>${label.title}` : ''}
+            ${!label.blank ? `<div style="font-size: 20px;"><small><a data-open-card="${menu.menuId}">${menu.title}</a> /</small></div>${label.title}` : ''}
             <span class="copy-link" title="Copy shareable link">
                 <svg viewBox="0 0 24 24" fill="none">
                     <path d="M10 13a5 5 0 0 0 7.07 0l3.54-3.54a5 5 0 0 0-7.07-7.07l-1.17 1.17" />
@@ -1337,7 +1337,7 @@ function search() {
         } else {
             matches = menu.labels.filter(label => {
                 return (label.title && stripHTML(label.title).toLowerCase().includes(q)) ||
-                    (label.excerpt && stripHTML(label.excerpt).toLowerCase().includes(q)) ||
+                    (label.subtitle && stripHTML(label.subtitle).toLowerCase().includes(q)) ||
                     (label.cSpecies && stripHTML(label.cSpecies).toLowerCase().includes(q)) ||
                     (label.cPronouns && stripHTML(label.cPronouns).toLowerCase().includes(q)) ||
                     (label.cGender && stripHTML(label.cGender).toLowerCase().includes(q)) ||
@@ -1361,7 +1361,7 @@ function search() {
     } else {
         menuMatches = menuItems.filter(menu => {
             if (menu.invisible) return false;
-            return (menu.name && menu.name.toLowerCase().includes(q)) || (menu.subtitle && menu.subtitle.toLowerCase().includes(q));
+            return (menu.title && menu.title.toLowerCase().includes(q)) || (menu.subtitle && menu.subtitle.toLowerCase().includes(q));
         });
     }
 
@@ -1379,7 +1379,7 @@ function search() {
         if (!specialQuery) {
             labelGroup.push({
                 title: 'Nothing found',
-                excerpt: ''
+                subtitle: ''
             });
 
         } else {
@@ -1387,7 +1387,7 @@ function search() {
             if (data && !data.special) {
                 labelGroup.push({
                     title: data.title,
-                    excerpt: data.excerpt || ''
+                    subtitle: data.subtitle || ''
                 });
             }
         }
@@ -1396,7 +1396,7 @@ function search() {
         // add cards from found menus
         menusFound.forEach(({ menu, labels }) => {
             labelGroup.push({
-                title: `<span style="border-left: 6px solid var(--white); padding-right: 8px"></span>Results from <a data-open-card="${menu.menuId}">${menu.name}</a>`
+                title: `<span style="border-left: 6px solid var(--white); padding-right: 8px"></span>Results from <a data-open-card="${menu.menuId}">${menu.title}</a>`
             });
             labels.forEach(label => labelGroup.push({ ...label, fromMenu: menu.menuId }));
         });
@@ -1407,8 +1407,8 @@ function search() {
             menuMatches.forEach(menu => {
                 labelGroup.push({
                     cardId: `menu-${menu.menuId}`,
-                    title: menu.name,
-                    excerpt: menu.subtitle || '',
+                    title: menu.title,
+                    subtitle: menu.subtitle || '',
                     image: menu.image || '',
                     linkId: menu.menuId,
                 });
@@ -1425,7 +1425,7 @@ function search() {
         if (!(single.linkId)) {
             menuParent = menuItems.find(m => m.menuId == single.fromMenu);
             searchId = menuParent.menuId;
-            searchName = menuParent.name;
+            searchName = menuParent.title;
             openSingle = true;
         } else {
             openMenuById(single.linkId);
@@ -1438,7 +1438,7 @@ function search() {
 
     const searchMenu = {
         menuId: searchId,
-        name: searchName,
+        title: searchName,
         subtitle: `Found ${labelGroup.filter(label => label.cardId || label.linkId).length} result(s)`,
         labels: labelGroup,
     };
@@ -1709,7 +1709,7 @@ function openCardById(menuCode, cardKey, single = false) {
     }
 
     const isCurrentlyOpen = contentTitle.textContent &&
-        contentTitle.textContent.toLowerCase() === targetMenu.name.toLowerCase();
+        contentTitle.textContent.toLowerCase() === targetMenu.title.toLowerCase();
 
     if (!isCurrentlyOpen) openMenuById(menuCode, true);
 
@@ -1763,7 +1763,7 @@ function goBack() {
         const currentMenu = menuItems.find(m => m.menuId === menuCode);
         if (currentMenu && currentMenu.parent && !openFromSearch) {
             const parentMenu = menuItems.find(m => m.menuId === currentMenu.parent);
-            backBtn.querySelector('span').textContent = parentMenu ? parentMenu.name : SIMPLE_MODE ? 'Close' : 'Menu';
+            backBtn.querySelector('span').textContent = parentMenu ? parentMenu.title : SIMPLE_MODE ? 'Close' : 'Menu';
         } else {
             backBtn.querySelector('span').textContent = SIMPLE_MODE ? 'Close' : 'Menu';
         }
@@ -1918,7 +1918,7 @@ window.addEventListener('popstate', (event) => {
     openMenuById(menuCode);
     const targetMenu = menuItems.find(m => m.menuId.toLowerCase() === menuCode.toLowerCase());
     if (!targetMenu) return;
-    const button = Array.from($$('.menu-button')).find(b => b.getAttribute('aria-label').toLowerCase() === targetMenu.name.toLowerCase());
+    const button = Array.from($$('.menu-button')).find(b => b.getAttribute('aria-label').toLowerCase() === targetMenu.title.toLowerCase());
     if (!button) return;
     openMenu(targetMenu, button, { skipAnimation: true });
 

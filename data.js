@@ -3,8 +3,8 @@
     -------------------------- */
 
 // Metadata
-const lastUpdated = 'February 2nd, 2026';
-const version = '1.0.1';
+const lastUpdated = 'February 8th, 2026';
+const version = '1.0.2';
 
 
 
@@ -16,12 +16,12 @@ const version = '1.0.1';
 orbitData = [
     {
         orbit: 1,
-        name: "Getting Started",
+        title: "Getting Started",
         desc: "New here?",
     },
     {
         orbit: 3,
-        name: "Others",
+        title: "Others",
         desc: "Miscellanous",
     },
 ];
@@ -42,8 +42,8 @@ menuItems = [
 
         orbit: 1,                             // INTEGER: Orbit layer placement
         menuId: 'menuTemplate',               // REQUIRED: Unique identifier (alphanumeric, no spaces). use anything EXCEPT 'index'
-        name: 'Menu Template',                // Menu name and title
-        showName: true,                      // Show name in orbit
+        title: 'Menu Template',                // Menu name and title
+        showTitle: true,                      // Show name in orbit
         subtitle: 'This is a menu example',   // Short description
         image: 'images/temp2.png',            // Orbit thumbnail image
         color: 'var(--color-1)',              // Menu color (hex, CSS var, or blank)
@@ -55,26 +55,26 @@ menuItems = [
             {
                 // Cards without cardId become separators
                 title: 'Card examples',
-                excerpt: 'Main card types to put your content in',
+                subtitle: 'Main card types to put your content in',
             },
             {
                 cardId: 'normalCard',         // REQUIRED: Unique card identifier
                 title: 'Normal Card',
-                excerpt: 'With thumbnail',
+                subtitle: 'With thumbnail',
                 detail: 'This is a template for a normal card.<br>You can fill these with whatever you want in raw HTML.',
                 image: 'images/temp.png'        // Thumbnail will be shown in 1:1 aspect ratio
             },
             {
                 cardId: 'urlCard',
                 title: 'URL Card',
-                excerpt: 'With thumbnail',
+                subtitle: 'With thumbnail',
                 url: 'https://x.com/artifyber',  // External URL redirect
                 image: 'images/temp.png'
             },
             {
                 cardId: 'unclickableCard',
                 title: 'Unclickable Card',
-                excerpt: 'With thumbnail',
+                subtitle: 'With thumbnail',
                 unclickable: true,            // Non-clickable info card
                 image: 'images/temp.png'
             },
@@ -103,19 +103,19 @@ menuItems = [
             {
                 cardId: 'normalCardPlain',
                 title: 'Normal Card',
-                excerpt: 'Without thumbnail',
+                subtitle: 'Without thumbnail',
                 detail: 'This is a template for a normal card.<br>You can fill these with whatever you want in raw HTML.'
             },
             {
                 cardId: 'urlCardPlain',
                 title: 'URL Card',
-                excerpt: 'Without thumbnail',
+                subtitle: 'Without thumbnail',
                 url: 'https://x.com/artifyber'
             },
             {
                 cardId: 'unclickableCardPlain',
                 title: 'Unclickable Card',
-                excerpt: 'Without thumbnail',
+                subtitle: 'Without thumbnail',
                 unclickable: true
             },
 
@@ -123,12 +123,12 @@ menuItems = [
             {
                 // Cards without cardId become separators
                 title: 'Banner examples',
-                excerpt: 'Useful for describing a section of card grid',
+                subtitle: 'Useful for describing a section of card grid',
             },
             {
                 cardId: 'bannerCard',
                 title: 'Banner Card',
-                excerpt: 'A type of card that spans the entire width of the container',
+                subtitle: 'A type of card that spans the entire width of the container',
                 detail: 'This is a template for a normal card.<br>You can fill these with whatever you want in raw HTML.',
                 banner: true,
                 image: 'images/temp3.png'
@@ -136,7 +136,7 @@ menuItems = [
             {
                 cardId: 'bannerUrlCard',
                 title: 'Banner Card (URL)',
-                excerpt: 'A type of card that spans the entire width of the container',
+                subtitle: 'A type of card that spans the entire width of the container',
                 banner: true,
                 url: 'https://x.com/artifyber',
                 image: 'images/temp3.png'
@@ -144,7 +144,7 @@ menuItems = [
             {
                 cardId: 'bannerUnclickableCard',
                 title: 'Banner Card (Unclickable)',
-                excerpt: 'A type of card that spans the entire width of the container',
+                subtitle: 'A type of card that spans the entire width of the container',
                 banner: true,
                 unclickable: true,
                 image: 'images/temp3.png'
@@ -152,21 +152,21 @@ menuItems = [
             {
                 cardId: 'bannerCardBlank',
                 title: 'Banner Card - No Thumbnail',
-                excerpt: 'A type of card that spans the entire width of the container',
+                subtitle: 'A type of card that spans the entire width of the container',
                 detail: 'This is a template for a normal card.<br>You can fill these with whatever you want in raw HTML.',
                 banner: true,
             },
             {
                 cardId: 'bannerUrlCardBlank',
                 title: 'Banner Card - No Thumbnail (URL)',
-                excerpt: 'A type of card that spans the entire width of the container',
+                subtitle: 'A type of card that spans the entire width of the container',
                 banner: true,
                 url: 'https://x.com/artifyber',
             },
             {
                 cardId: 'bannerUnclickableCardBlank',
                 title: 'Banner Card - No Thumbnail (Unclickable)',
-                excerpt: 'A type of card that spans the entire width of the container',
+                subtitle: 'A type of card that spans the entire width of the container',
                 banner: true,
                 unclickable: true,
             },
@@ -174,7 +174,7 @@ menuItems = [
             // MENU-LINKED CARDS
             {
                 title: 'Menu-Link examples',
-                excerpt: 'Cards that open another menu',
+                subtitle: 'Cards that open another menu',
             },
             {
                 linkId: 'info'
@@ -187,7 +187,7 @@ menuItems = [
             // REFERENCES
             {
                 title: 'Reference examples',
-                excerpt: 'A way to copy cards from another menu. Useful for pinning!',
+                subtitle: 'A way to copy cards from another menu. Useful for pinning!',
             },
             {
                 reference: 'info:ocrules'
@@ -207,8 +207,8 @@ menuItems = [
 
         orbit: 1,
         menuId: 'ocTemplate',
-        name: 'Character Template',
-        showName: true,
+        title: 'Character Template',
+        showTitle: true,
         subtitle: 'This is a character menu example',
         image: 'images/temp2.png',
         color: 'var(--color-4)',
@@ -219,7 +219,7 @@ menuItems = [
             {
                 cardId: 'thinkingMonkey',
                 title: 'Thinking Monkey',
-                excerpt: '',
+                subtitle: '',
 
                 isCharacter: true,
                 cSpecies: 'Monkey',
@@ -248,9 +248,9 @@ menuItems = [
     {
         // Random
         orbit: 3,
-        name: 'Random Character',
+        title: 'Random Character',
         menuId: 'random',
-        showName: true,
+        showTitle: true,
         image: 'icons/random.png',
         color: 'var(--color-2)',
         scale: 1.5,
@@ -264,10 +264,10 @@ menuItems = [
     {
         // Information
         orbit: 3,
-        name: 'Information',
+        title: 'Information',
         menuId: 'info',
         subtitle: 'Information about author and this website',
-        showName: true,
+        showTitle: true,
         image: 'icons/info.png',
         color: 'var(--color-3)',
         scale: 1.5,
@@ -275,14 +275,14 @@ menuItems = [
             {
                 cardId: 'notice',
                 title: 'NOTICE:',
-                excerpt: `This template is not ready. Don't use it just yet.`,
+                subtitle: `This template is not ready. Don't use it just yet.`,
                 unclickable: true,
             },
             {},
             {
                 cardId: 'ocrules',
                 title: 'Character Rules',
-                excerpt: `Rules regarding character usage`,
+                subtitle: `Rules regarding character usage`,
                 detail:
                     `
                     <h2>Fanart Policy</h2>
@@ -301,7 +301,7 @@ menuItems = [
             {
                 cardId: 'credits',
                 title: `Credits`,
-                excerpt: `
+                subtitle: `
                         Created using Omniverse Web Template<br>
                         by <a href="https://x.com/artifyber" target="_blank">Artifyber</a>
                 `,
@@ -317,8 +317,8 @@ menuItems = [
         // Settings
         orbit: 1,
         menuId: 'settings',
-        name: 'Settings',
-        showName: true,
+        title: 'Settings',
+        showTitle: true,
         color: 'var(--color-4)',
         hidden: true,
         invisible: true,
@@ -326,7 +326,7 @@ menuItems = [
             {
                 cardId: 'modeSwitch',
                 title: `Layout`,
-                excerpt: `
+                subtitle: `
                         <button type="button" id="modeSwitch">Switch Layout</button>
                 `,
                 unclickable: true,
@@ -337,7 +337,7 @@ menuItems = [
             {
                 cardId: 'keybinds',
                 title: `Keyboard Shortcut`,
-                excerpt: `
+                subtitle: `
                         ESC = Go back<br>
                         SPACE = Open search<br>
                         C = Center view<br>
@@ -358,7 +358,7 @@ menuItems = [
             {
                 cardId: 'webinfo',
                 title: `Website Info`,
-                excerpt: `Updated: ${lastUpdated}<br>
+                subtitle: `Updated: ${lastUpdated}<br>
                         Version: ${version}<br>
                         <br>
                         <div style='color: color-mix(in srgb, var(--accentl) 75%, transparent)' id="totalCardsCounter"></div>
@@ -387,27 +387,27 @@ menuItems = [
 specialSearch = {
     nothing: {
         title: 'Nothing found!',
-        excerpt: ''
+        subtitle: ''
     },
     something: {
         title: 'Something found!',
-        excerpt: `...It's just me LOL<br>
+        subtitle: `...It's just me LOL<br>
         My name is omniLens btw! You've probably met my brother omniTracer! He's such a powerful guy...<br>
         Lowkey i'm kinda jealous of him. I wish to be as powerful as him one day :(`
     },
     content: {
         title: 'Content found!',
-        excerpt: `Yup, i am the content. You've found me heehee!<br>
+        subtitle: `Yup, i am the content. You've found me heehee!<br>
         Aww you listened to what i said!<br>
         Good boy :)`
     },
     help: {
         title: 'help yourself bro LOLXD',
-        excerpt: ''
+        subtitle: ''
     },
     hi: {
         title: 'HAII HIIII HELLLOOO!!!! :DD',
-        excerpt: ''
+        subtitle: ''
     },
 };
 
@@ -430,7 +430,7 @@ function generateLabels(n, prefix) {
     return Array.from({ length: n }).map((_, i) => ({
         id: i + 1,
         title: `${prefix} Item ${i + 1}`,
-        excerpt: `This is a short placeholder excerpt for ${prefix} item ${i + 1}.`,
+        subtitle: `This is a short placeholder excerpt for ${prefix} item ${i + 1}.`,
         detail: `Detailed description for ${prefix} item ${i + 1}. You can replace this with whatever content you want. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ut nulla sed velit malesuada fermentum.`,
         image: 'images/temp.png'
     }));
