@@ -3,11 +3,22 @@
     -------------------------- */
 
 // Metadata
-const lastUpdated = 'February 8th, 2026';
-const version = '1.0.2';
+const lastUpdated = 'February 24th, 2026';
+const version = '1.1.0';
 
+// menu logo redirection
+menuLogoRedirect = 'info';
 
-
+// orbitData attributes:
+// orbit: int            - which orbit id these attributes apply to
+// title: string         - the title of this orbit
+// desc: string          - the description of this orbit
+// orbitNum: int         - the actual orbit layer which determine how far it is from the center. defaults to orbit
+// direction: float      - the direction of spin and how fast it is. x<0 is clockwise, x>0 is counterclockwise.
+// offsetX: int          - offsets the X position of this orbit by pixels
+// offsetY: int          - offsets the Y position of this orbit by pixels
+// scaleX: float         - scale this orbit by the X axis
+// scaleY: float         - scale this orbit by the Y axis
 
 // Orbit data
 
@@ -26,8 +37,41 @@ orbitData = [
     },
 ];
 
+// menu attributes:
+// menuId: string           - REQUIRED: unique identifier for the menu (alphanumeric, no spaces)
+// title: string            - menu name and title
+// subtitle: string         - short description of menu
+// showTitle: bool          - show name in orbit?
+// orbit: float             - orbit id and default layer placement
+// image: string            - path to the menu thumbnail image. optional
+// color: string            - CSS color of menu. optional
+// scale: float             - if set, modify the menu button scale
+// hidden: bool             - if set, hide menu from orbit (accessible via links only)
+// invisible: bool          - if set, exclude from search
+// labels: array            - cards inside this menu. optional. if a menu has only one card it'll open that automatically
 
-
+// card attributes:
+// cardId: string           - unique identifier for the card (alphanumeric, no spaces). if unset, this becomes a separator
+// title: string            - card title
+// subtitle: string         - short description / excerpt of card
+// detail: string           - the HTML contents of this card
+// image: string            - path to the card thumbnail image. optional
+// url: string              - if set, this card becomes a URL-type card
+// unclickable: bool        - if set, this card becomes unclickable
+// blank: bool              - if set, make this card textless (image-only)
+// banner: bool             - if set, this card becomes a banner-type card
+// linkId: string           - if set as the only attribute, this card links to another menu (menuId)
+// reference: string        - if set as the only attribute, this card copies another card (menuId:cardId)
+// isCharacter: bool        - if set, this is a character card
+// cSpecies: string         - the character species. optional
+// cPronouns: string        - the character pronouns. optional
+// cGender: string          - the character gender. optional
+// cSexuality: string       - the character sexuality. optional
+// cNicknames: string       - the character nicknames. optional
+// cAddOns: string          - extra HTML put above the reference art of the character. optional
+// cReference: string       - path to the character reference art. optional
+// cGallery: array          - array of path to character images. optional
+// cardParentId: string     - DEV ONLY: contains the automatically-assigned menuId of this card
 
 // Main menu data array
 menuItems = [
@@ -117,6 +161,24 @@ menuItems = [
                 title: 'Unclickable Card',
                 subtitle: 'Without thumbnail',
                 unclickable: true
+            },
+            {
+                cardId: 'motherCard',
+                title: 'Mothercard',
+                subtitle: 'This card contains more cards',
+                detail: `
+                    You can embed cards inside another card by simply using a div element with <code>class="card internal"</code> and set it to reference another card using <code>data-href="menuId:cardId"</code><br>
+                    <br>
+                    To set a caption, use <code>data-caption="caption"</code>
+                    <div class="imgContainer">
+                        <div class="card internal" data-href="menuTemplate:normalCard""></div>
+                        <div class="card internal" data-href="info"></div>
+                        <div class="card internal" data-href="menuTemplate:unclickableCardPlain" data-caption="Optional caption!"></div>
+                        <div class="card internal" data-href="menuTemplate:motherCard" data-caption="Cardception..."></div>
+                    </div>
+                    You can even embed itself if you want!
+                `,
+                image: 'images/temp2.png'
             },
 
             // BANNER CARDS
@@ -378,48 +440,6 @@ menuItems = [
 
 
 
-
-
-
-// Special search responses
-
-// Try typing these special keywords on the search bar!
-specialSearch = {
-    nothing: {
-        title: 'Nothing found!',
-        subtitle: ''
-    },
-    something: {
-        title: 'Something found!',
-        subtitle: `...It's just me LOL<br>
-        My name is omniLens btw! You've probably met my brother omniTracer! He's such a powerful guy...<br>
-        Lowkey i'm kinda jealous of him. I wish to be as powerful as him one day :(`
-    },
-    content: {
-        title: 'Content found!',
-        subtitle: `Yup, i am the content. You've found me heehee!<br>
-        Aww you listened to what i said!<br>
-        Good boy :)`
-    },
-    help: {
-        title: 'help yourself bro LOLXD',
-        subtitle: ''
-    },
-    hi: {
-        title: 'HAII HIIII HELLLOOO!!!! :DD',
-        subtitle: ''
-    },
-};
-
-
-
-
-
-
-
-
-
-
 /*
  * Generate placeholder cards for testing
  * @param {number} n - Number of placeholder cards to generate
@@ -435,6 +455,27 @@ function generateLabels(n, prefix) {
         image: 'images/temp.png'
     }));
 }
+
+// Special search responses
+specialSearch = [
+    {
+        query: 'nothing',
+        title: 'Nothing found!',
+        subtitle: ''
+    },
+    {
+        query: 'content',
+        title: 'Content found!',
+        subtitle: `Yup, i am the content. You've found me heehee!<br>
+        Aww you listened to what i said!<br>
+        Good boy :)`
+    },
+    {
+        query: 'help',
+        title: 'help yourself bro LOLXD',
+        subtitle: ''
+    }
+];
 
 // Calculate totals for statistics
 totalCards = menuItems.reduce((sum, item) => sum + item.labels.length, 0);
