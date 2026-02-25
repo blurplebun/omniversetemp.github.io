@@ -3,8 +3,8 @@
     -------------------------- */
 
 // Metadata
-const lastUpdated = 'February 24th, 2026';
-const version = '1.1.0';
+const lastUpdated = 'February 25th, 2026';
+const version = '1.1.1';
 
 // menu logo redirection
 menuLogoRedirect = 'info';
@@ -19,6 +19,7 @@ menuLogoRedirect = 'info';
 // offsetY: int          - offsets the Y position of this orbit by pixels
 // scaleX: float         - scale this orbit by the X axis
 // scaleY: float         - scale this orbit by the Y axis
+// center: string        - menuId of a visible orbiting button that can be set as the center of the ring. making it work like sattelites
 
 // Orbit data
 
