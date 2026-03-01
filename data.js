@@ -3,8 +3,8 @@
     -------------------------- */
 
 // Metadata
-const lastUpdated = 'February 25th, 2026';
-const version = '1.1.1';
+const lastUpdated = 'March 1st, 2026';
+const version = '1.0.4';
 
 // menu logo redirection
 menuLogoRedirect = 'info';
@@ -404,7 +404,6 @@ menuItems = [
                         ESC = Go back<br>
                         SPACE = Open search<br>
                         C = Center view<br>
-                        H = Hide UIs<br>
                 `,
                 unclickable: true,
                 detail:
